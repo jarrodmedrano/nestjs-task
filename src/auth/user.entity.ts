@@ -1,5 +1,6 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, Unique, OneToMany } from "typeorm";
 import * as bcrypt from 'bcrypt';
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
+import { Character } from '../characters/character.entity';
 import { Task } from '../tasks/task.entity';
 
 @Entity()
@@ -19,6 +20,9 @@ export class User extends BaseEntity {
 
   @OneToMany(type => Task, task => task.user, { eager: true })
   tasks: Task[];
+
+  @OneToMany(type => Character, character => character.user, { eager: true })
+  characters: Character[];
 
 
   // retrieve password from the request body
